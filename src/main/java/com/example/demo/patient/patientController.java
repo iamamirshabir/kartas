@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,8 @@ public class patientController {
 		  }
 	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
+	  
 	  public
 	  List<Patient> all(){
 		  List<Patient> patients = repository.findAll();
@@ -37,6 +40,8 @@ public class patientController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @GetMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
+	  
 	  public
 	  ResponseEntity<?> getById(@RequestParam(name = "id") Long id){
 		  Optional<Patient> optionalUser = repository.findById(id);
@@ -48,12 +53,15 @@ public class patientController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @PostMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  ResponseEntity<?> newUser(@RequestBody Patient newUser ) {
 		Patient patient = repository.save(newUser);
 		  return ResponseEntity.ok(patient);
 	  }
 	  
 	  @PutMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
+	  
 	  ResponseEntity<?> replacePatient(@RequestBody Patient newPatient, @PathVariable Long id) {
 		  Patient updatedUser = repository.findById(id)
 				  .map(patient ->{
@@ -75,6 +83,8 @@ public class patientController {
 	  }
 	  
 	  @DeleteMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
+	  
 	  void deletePatient(@PathVariable Long id) {
 	    repository.deleteById(id);
 	  }

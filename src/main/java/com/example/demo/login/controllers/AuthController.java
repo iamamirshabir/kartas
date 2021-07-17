@@ -6,8 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +34,7 @@ import com.example.demo.login.security.services.UserDetailsImpl;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -95,9 +94,9 @@ public class AuthController {
 		Set<Role> roles = new HashSet<>();
 
 		if (strRoles == null) {
-			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+			Role donorRole = roleRepository.findByName(ERole.ROLE_DONOR)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-			roles.add(userRole);
+			roles.add(donorRole);
 		} else {
 			strRoles.forEach(role -> {
 				switch (role) {
@@ -107,16 +106,21 @@ public class AuthController {
 					roles.add(adminRole);
 
 					break;
-				case "mod":
-					Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+				case "student":
+					Role stdRole = roleRepository.findByName(ERole.ROLE_STUDENT)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(modRole);
+					roles.add(stdRole);
 
 					break;
-				default:
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+				case "patient":
+					Role ptRole = roleRepository.findByName(ERole.ROLE_PATIENT)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
+					roles.add(ptRole);
+
+					break;				default:
+					Role donorRole = roleRepository.findByName(ERole.ROLE_DONOR)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(donorRole);
 				}
 			});
 		}

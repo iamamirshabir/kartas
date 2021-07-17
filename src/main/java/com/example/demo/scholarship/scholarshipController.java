@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,8 @@ public class scholarshipController {
 		  }
 	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  public
 	  List<scholarship> all(){
 		  List<scholarship> scholarship = repository.findAll();
@@ -39,6 +42,8 @@ public class scholarshipController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @GetMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  public
 	  ResponseEntity<?> getById(@RequestParam(name = "id") Long id){
 		  Optional<scholarship> optionalUser = repository.findById(id);
@@ -50,12 +55,16 @@ public class scholarshipController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @PostMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  ResponseEntity<?> newUser(@RequestBody scholarship newUser ) {
 		  scholarship scholarship = repository.save(newUser);
 		  return ResponseEntity.ok(scholarship);
 	  }
 	  
 	  @PutMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  ResponseEntity<?> replacescholarship(@RequestBody scholarship newscholarship, @PathVariable Long id) {
 		  scholarship updatedUser = repository.findById(id)
 				  .map(scholarship ->{
@@ -75,6 +84,8 @@ public class scholarshipController {
 	  }
 	  
 	  @DeleteMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  void deletescholarship(@PathVariable Long id) {
 	    repository.deleteById(id);
 	  }

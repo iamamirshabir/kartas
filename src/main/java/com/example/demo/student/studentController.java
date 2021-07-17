@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,6 +43,8 @@ public class studentController {
 		  }
 	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  public
 	  List<Student> all(){
 		  List<Student> student = repository.findAll();
@@ -50,6 +53,8 @@ public class studentController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @GetMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  public
 	  ResponseEntity<?> getById(@RequestParam(name = "id") Long id){
 		  Optional<Student> optionalUser = repository.findById(id);
@@ -61,12 +66,16 @@ public class studentController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @PostMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  ResponseEntity<?> newUser(@RequestBody Student newUser ) {
 		  Student student = repository.save(newUser);
 		  return ResponseEntity.ok(student);
 	  }
 	  
 	  @PutMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  ResponseEntity<?> replaceStudent(@RequestBody Student newStudent, @PathVariable Long id) {
 		  Student updatedUser = repository.findById(id)
 				  .map(student ->{
@@ -90,6 +99,8 @@ public class studentController {
 	  }
 	  
 	  @DeleteMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+	  
 	  void deleteStudent(@PathVariable Long id) {
 	    repository.deleteById(id);
 	  }

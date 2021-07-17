@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +34,8 @@ public class donorController {
 		  }
 	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') ")
+	  
 	  public
 	  List<Donor> all(){
 		  List<Donor> donor = repository.findAll();
@@ -41,6 +44,7 @@ public class donorController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @GetMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")	  
 	  public
 	  ResponseEntity<?> getById(@RequestParam(name = "id") Long id){
 		  Optional<Donor> optionalUser = repository.findById(id);
@@ -52,12 +56,16 @@ public class donorController {
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
 	  @PostMapping("/")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
+	  
 	  ResponseEntity<?> newUser(@RequestBody Donor newUser ) {
 		  Donor donor = repository.save(newUser);
 		  return ResponseEntity.ok(donor);
 	  }
 	  
 	  @PutMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
+	  
 	  ResponseEntity<?> replaceDonor(@RequestBody Donor newDonor, @PathVariable Long id) {
 		  Donor updatedUser = repository.findById(id)
 				  .map(donor ->{
@@ -79,6 +87,8 @@ public class donorController {
 	  }
 	  
 	  @DeleteMapping("/{id}")
+	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
+	  
 	  void deleteStudent(@PathVariable Long id) {
 	    repository.deleteById(id);
 	  }
