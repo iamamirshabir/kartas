@@ -16,6 +16,10 @@ public class Medication {
 	@Column(name="medication_id")
 	private Long id;
 	
+
+	@Column(name="eligible")
+	private boolean eligible;
+	
 	@Column(name="amount")
 	private double amount;
 	public Long getId() {
@@ -23,6 +27,13 @@ public class Medication {
 	}
 	public void setId(Long id2) {
 		this.id = id2;
+	}
+	
+	public boolean isEligible() {
+		return eligible;
+	}
+	public void setEligible(boolean eligible) {
+		this.eligible = eligible;
 	}
 	public double getAmount() {
 		return amount;

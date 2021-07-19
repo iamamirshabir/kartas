@@ -69,8 +69,28 @@ public class scholarshipController {
 		  scholarship updatedUser = repository.findById(id)
 				  .map(scholarship ->{
 					  scholarship.setAmount(newscholarship.getAmount());
+					  scholarship.setEligible(false);
 					  scholarship.setGranted(newscholarship.getGranted());
 					  
+					  return repository.save(scholarship);
+				  })
+				  .orElseGet(() ->{
+					  newscholarship.setId(id);
+					  return repository.save(newscholarship);
+				  });
+		  
+		  return ResponseEntity.ok(updatedUser);
+				  
+					 
+	  }
+	  
+	  @PutMapping("/grant/{id}")
+	  @PreAuthorize("hasRole('ADMIN')")
+	  
+	  ResponseEntity<?> grantscholarship(@RequestBody scholarship newscholarship, @PathVariable Long id) {
+		  scholarship updatedUser = repository.findById(id)
+				  .map(scholarship ->{
+					  scholarship.setEligible(true);
 					  return repository.save(scholarship);
 				  })
 				  .orElseGet(() ->{

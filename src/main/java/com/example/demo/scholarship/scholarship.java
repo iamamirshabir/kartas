@@ -1,5 +1,6 @@
 package com.example.demo.scholarship;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,8 +28,17 @@ public class scholarship {
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "patient_id", nullable = false)
 	    private Patient patient;
-	 
+
+	@Column(name="amount")
+
 	 private double amount;
+ 
+	
+		@Column(name="eligible")
+		private boolean eligible;
+
+		@Column(name="granted")
+
 	 private String granted;
 	public Long getId() {
 		return id;
@@ -44,6 +54,13 @@ public class scholarship {
 	}
 	public Patient getPatient() {
 		return patient;
+	}
+	
+	public boolean isEligible() {
+		return eligible;
+	}
+	public void setEligible(boolean eligible) {
+		this.eligible = eligible;
 	}
 	public void setPatient(Patient patient) {
 		this.patient = patient;

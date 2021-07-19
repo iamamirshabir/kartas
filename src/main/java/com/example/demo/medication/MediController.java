@@ -66,6 +66,27 @@ public class MediController {
 		  Medication updatedUser = repository.findById(id)
 				  .map(medi ->{
 					  medi.setAmount(newMedication.getAmount());
+					  medi.setEligible(false);
+					 
+					  return repository.save(medi);
+				  })
+				  .orElseGet(() ->{
+					  newMedication.setId(id);
+					  return repository.save(newMedication);
+				  });
+		  
+		  return ResponseEntity.ok(updatedUser);
+				  
+					 
+	  }
+	  
+	  @PutMapping("/grant/{id}")
+	  @PreAuthorize("hasRole('ADMIN')")
+	  
+	  ResponseEntity<?> grantMedication(@RequestBody Medication newMedication, @PathVariable Long id) {
+		  Medication updatedUser = repository.findById(id)
+				  .map(medi ->{
+					  medi.setEligible(true);
 					 
 					  return repository.save(medi);
 				  })
