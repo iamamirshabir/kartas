@@ -23,23 +23,23 @@ public class Donation {
 	@Column(name="donation_id")
 	private Long donation_id;
 	
-	 @ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "donor_id")
 	private Donor donor;
 	
-	@Column(name="d_amount")
-	private Long d_amount;
+	@Column(name="amount")
+	private Long amount;
 	
-	@Column(name="d_onday")
-	private Long d_onday;
+	@Column(name="onday")
+	private String onday;
 	
 	
-	public Donation(Long donation_id, Donor donor, Long d_amount, Long d_onday) {
+	public Donation(Long donation_id, Donor donor, Long amount, String onday) {
 		super();
 		this.donation_id = donation_id;
 		this.donor = donor;
-		this.d_amount = d_amount;
-		this.d_onday = d_onday;
+		this.amount = amount;
+		this.onday = onday;
 	}
 	
 	
@@ -61,19 +61,19 @@ public class Donation {
 	}
 
 	public Long getD_amount() {
-		return d_amount;
+		return amount;
 	}
 
-	public void setD_amount(Long d_amount) {
-		this.d_amount = d_amount;
+	public void setD_amount(Long amount) {
+		this.amount = amount;
 	}
 
-	public Long getD_onday() {
-		return d_onday;
+	public String getD_onday() {
+		return onday;
 	}
 
-	public void setD_onday(Long d_onday) {
-		this.d_onday = d_onday;
+	public void setD_onday(String onday) {
+		this.onday = onday;
 	}
 
 	public Donation() {
@@ -81,18 +81,18 @@ public class Donation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Donation(Long donation_id, Long d_amount, Long d_onday) {
+	public Donation(Long donation_id, Long amount, String onday) {
 		super();
 		this.donation_id = donation_id;
-		this.d_amount = d_amount;
-		this.d_onday = d_onday;
+		this.amount = amount;
+		this.onday = onday;
 	}
 
 	
 
 	@Override
 	public String toString() {
-		return "Donation [donation_id=" + donation_id + ", d_amount=" + d_amount + ", d_onday=" + d_onday + "]";
+		return "Donation [donation_id=" + donation_id + ", amount=" + amount + ", onday=" + onday + "]";
 	}
 	
 	

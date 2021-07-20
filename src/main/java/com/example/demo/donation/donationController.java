@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.donor.Donor;
+import com.example.demo.donor.donorrepo;
+
 
 
 @RestController
@@ -26,8 +29,12 @@ public class donationController {
 	@Autowired
 	private final donationrepo repository;	
 	
-	donationController(donationrepo repository) {
+	@Autowired
+	private final donorrepo drepository;
+	
+	donationController(donationrepo repository,donorrepo donorrepo) {
 		    this.repository = repository;
+		    this.drepository = donorrepo;
 		   
 		  }
 	  @CrossOrigin(origins = "http://localhost:3000") 
@@ -53,10 +60,18 @@ public class donationController {
 	   }
 	  
 	  @CrossOrigin(origins = "http://localhost:8089") 
-	  @PostMapping("/")
+	  @PostMapping("/donor/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  
-	  ResponseEntity<?> newUser(@RequestBody Donation newUser ) {
+	  ResponseEntity<?> newUser(@RequestBody Donation newUser, @PathVariable Long id  ) {
+		  Optional<Donor> optionalDonor = drepository.findById(id);
+			 if (!optionalDonor.isPresent()) {
+		            return ResponseEntity.unprocessableEntity().build();
+		        }
+			 newUser.setDonor(optionalDonor.get());
+			 //adds to total amount added 
+			 optionalDonor.get().setAmount(optionalDonor.get().getAmount()+newUser.getD_amount());
+		  
 		  Donation donation = repository.save(newUser);
 		  return ResponseEntity.ok(donation);
 	  }

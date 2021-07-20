@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.demo.medication.Medication;
 import com.example.demo.scholarship.scholarship;
+
 
 
 @Entity
@@ -20,12 +22,6 @@ public class Patient {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="patient_id")
 	private Long patient_id;
-	
-	
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "patient")
-	private scholarship scholarship;
 	
 	@Column(name="patient_name")
 	private String patient_name;
@@ -42,6 +38,11 @@ public class Patient {
 	@Column(name="patient_mobile")
 	private String patient_mobile;
 
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "patient")
+	private Medication medication;
+	 
 	public Long getPatient_id() {
 		return patient_id;
 	}
@@ -95,21 +96,31 @@ public class Patient {
 		
 	}
 
-	public Patient(Long patient_id, com.example.demo.scholarship.scholarship scholarship, String patient_name,
-			String patient_hospital, String patient_cnic, String patient_email, String patient_mobile) {
+
+
+	public Medication getMedication() {
+		return medication;
+	}
+
+	public void setMedication(Medication medication) {
+		this.medication = medication;
+	}
+
+	public Patient(Long patient_id, String patient_name, String patient_hospital, String patient_cnic,
+			String patient_email, String patient_mobile, Medication medication) {
 		super();
 		this.patient_id = patient_id;
-		this.scholarship = scholarship;
 		this.patient_name = patient_name;
 		this.patient_hospital = patient_hospital;
 		this.patient_cnic = patient_cnic;
 		this.patient_email = patient_email;
 		this.patient_mobile = patient_mobile;
+		this.medication = medication;
 	}
 
 	@Override
 	public String toString() {
-		return "Patient [patient_id=" + patient_id + ", scholarship=" + scholarship + ", patient_name=" + patient_name
+		return "Patient [patient_id=" + patient_id  + ", patient_name=" + patient_name
 				+ ", patient_hospital=" + patient_hospital + ", patient_cnic=" + patient_cnic + ", patient_email="
 				+ patient_email + ", patient_mobile=" + patient_mobile + "]";
 	}
