@@ -24,10 +24,6 @@ public class scholarship {
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id", nullable = false)
 	    private Student student;
-	 
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "patient_id", nullable = false)
-	    private Patient patient;
 
 	@Column(name="amount")
 
@@ -52,18 +48,11 @@ public class scholarship {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	public Patient getPatient() {
-		return patient;
-	}
-	
 	public boolean isEligible() {
 		return eligible;
 	}
 	public void setEligible(boolean eligible) {
 		this.eligible = eligible;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
 	}
 	public double getAmount() {
 		return amount;
@@ -84,17 +73,16 @@ public class scholarship {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public scholarship(Long id, Student student, Patient patient, double amount, String granted) {
+	public scholarship(Long id, Student student,double amount, String granted) {
 		super();
 		this.id = id;
 		this.student = student;
-		this.patient = patient;
 		this.amount = amount;
 		this.granted = granted;
 	}
 	@Override
 	public String toString() {
-		return "scholarship [id=" + id + ", student=" + student + ", patient=" + patient + ", amount=" + amount
+		return "scholarship [id=" + id + ", student=" + student + ", amount=" + amount
 				+ ", granted=" + granted + "]";
 	}
 

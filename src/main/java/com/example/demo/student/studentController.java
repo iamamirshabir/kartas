@@ -24,12 +24,6 @@ import com.example.demo.patient.Patient;
 import com.example.demo.patient.patientrepo;
 
 
-
-
-
-
-
-
 @RestController
 @RequestMapping(value = "/api/student")
 public class studentController {

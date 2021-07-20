@@ -4,6 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
@@ -16,6 +18,7 @@ import com.example.demo.scholarship.scholarship;
 public class Student {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="student_id")
 	private Long student_id;
 	
@@ -26,25 +29,25 @@ public class Student {
 	private scholarship scholarship;
 	
 	@Column(name="student_name")
-	private int student_name;
+	private String student_name;
 	
 	@Column(name="student_rollno")
-	private int student_rollno;
+	private String student_rollno;
 	
 	@Column(name="student_dob")
-	private int student_dob;
+	private String student_dob;
 	
 	@Column(name="student_semester")
 	private int student_semester;
 	
 	@Column(name="student_institute")
-	private int student_institute;
+	private String student_institute;
 	
 	@Column(name="student_mobile")
-	private int student_mobile;
+	private String student_mobile;
 	
 	@Column(name="student_email")
-	private int student_email;
+	private String student_email;
 
 	public Long getStudent_id() {
 		return student_id;
@@ -54,27 +57,27 @@ public class Student {
 		this.student_id = student_id;
 	}
 
-	public int getStudent_name() {
+	public String getStudent_name() {
 		return student_name;
 	}
 
-	public void setStudent_name(int student_name) {
+	public void setStudent_name(String student_name) {
 		this.student_name = student_name;
 	}
 
-	public int getStudent_rollno() {
+	public String getStudent_rollno() {
 		return student_rollno;
 	}
 
-	public void setStudent_rollno(int student_rollno) {
+	public void setStudent_rollno(String student_rollno) {
 		this.student_rollno = student_rollno;
 	}
 
-	public int getStudent_dob() {
+	public String getStudent_dob() {
 		return student_dob;
 	}
 
-	public void setStudent_dob(int student_dob) {
+	public void setStudent_dob(String student_dob) {
 		this.student_dob = student_dob;
 	}
 
@@ -86,27 +89,27 @@ public class Student {
 		this.student_semester = student_semester;
 	}
 
-	public int getStudent_institute() {
+	public String getStudent_institute() {
 		return student_institute;
 	}
 
-	public void setStudent_institute(int student_institute) {
+	public void setStudent_institute(String student_institute) {
 		this.student_institute = student_institute;
 	}
 
-	public int getStudent_mobile() {
+	public String getStudent_mobile() {
 		return student_mobile;
 	}
 
-	public void setStudent_mobile(int student_mobile) {
+	public void setStudent_mobile(String student_mobile) {
 		this.student_mobile = student_mobile;
 	}
 
-	public int getStudent_email() {
+	public String getStudent_email() {
 		return student_email;
 	}
 
-	public void setStudent_email(int student_email) {
+	public void setStudent_email(String student_email) {
 		this.student_email = student_email;
 	}
 
@@ -115,9 +118,10 @@ public class Student {
 		
 	}
 
-	public Student(Long student_id, com.example.demo.scholarship.scholarship scholarship, int student_name,
-			int student_rollno, int student_dob, int student_semester, int student_institute, int student_mobile,
-			int student_email) {
+
+	public Student(Long student_id, com.example.demo.scholarship.scholarship scholarship, String student_name,
+			String student_rollno, String student_dob, int student_semester, String student_institute,
+			String student_mobile, String student_email) {
 		super();
 		this.student_id = student_id;
 		this.scholarship = scholarship;
