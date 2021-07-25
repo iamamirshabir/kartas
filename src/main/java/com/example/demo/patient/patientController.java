@@ -38,7 +38,7 @@ public class patientController {
 		  return patients;
 	  }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  
@@ -51,7 +51,7 @@ public class patientController {
 		  return ResponseEntity.ok().body((optionalUser.get()));
 	   }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PostMapping("/")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  ResponseEntity<?> newUser(@RequestBody Patient newUser ) {
@@ -59,6 +59,7 @@ public class patientController {
 		  return ResponseEntity.ok(patient);
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  
@@ -82,6 +83,7 @@ public class patientController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  

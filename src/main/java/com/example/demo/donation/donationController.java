@@ -46,7 +46,7 @@ public class donationController {
 		  return donation;
 	  }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/{id}")
 	  
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
@@ -59,7 +59,7 @@ public class donationController {
 		  return ResponseEntity.ok().body((optionalUser.get()));
 	   }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PostMapping("/donor/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  
@@ -76,6 +76,7 @@ public class donationController {
 		  return ResponseEntity.ok(donation);
 	  }
 	  
+	  @CrossOrigin(origins="http://localhost:3000")
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  ResponseEntity<?> replaceDonor(@RequestBody Donation newDonation, @PathVariable Long id) {
@@ -96,6 +97,7 @@ public class donationController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  void deleteStudent(@PathVariable Long id) {

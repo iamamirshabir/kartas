@@ -37,7 +37,7 @@ public class MediController {
 		  return medi;
 	  }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  
@@ -60,6 +60,7 @@ public class MediController {
 		  return ResponseEntity.ok(medi);
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  
@@ -81,6 +82,7 @@ public class MediController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/grant/{id}")
 	  @PreAuthorize("hasRole('ADMIN')")
 	  
@@ -101,6 +103,7 @@ public class MediController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  

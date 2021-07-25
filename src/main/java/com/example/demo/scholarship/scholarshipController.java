@@ -40,7 +40,7 @@ public class scholarshipController {
 		  return scholarship;
 	  }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
@@ -53,7 +53,7 @@ public class scholarshipController {
 		  return ResponseEntity.ok().body((optionalUser.get()));
 	   }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PostMapping("/")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
@@ -63,6 +63,7 @@ public class scholarshipController {
 		  return ResponseEntity.ok(scholarship);
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
@@ -85,6 +86,7 @@ public class scholarshipController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/grant/{id}")
 	  @PreAuthorize("hasRole('ADMIN')")
 	  
@@ -104,6 +106,7 @@ public class scholarshipController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  

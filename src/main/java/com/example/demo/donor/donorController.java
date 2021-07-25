@@ -42,7 +42,7 @@ public class donorController {
 		  return donor;
 	  }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")	  
 	  public
@@ -54,7 +54,7 @@ public class donorController {
 		  return ResponseEntity.ok().body((optionalUser.get()));
 	   }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PostMapping("/")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  
@@ -63,6 +63,7 @@ public class donorController {
 		  return ResponseEntity.ok(donor);
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  
@@ -86,6 +87,7 @@ public class donorController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('DONOR')")
 	  

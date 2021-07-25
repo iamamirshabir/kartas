@@ -45,7 +45,7 @@ public class studentController {
 		  return student;
 	  }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @GetMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
@@ -58,7 +58,7 @@ public class studentController {
 		  return ResponseEntity.ok().body((optionalUser.get()));
 	   }
 	  
-	  @CrossOrigin(origins = "http://localhost:8089") 
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PostMapping("/")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
@@ -67,6 +67,7 @@ public class studentController {
 		  return ResponseEntity.ok(student);
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @PutMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
@@ -92,6 +93,7 @@ public class studentController {
 					 
 	  }
 	  
+	  @CrossOrigin(origins = "http://localhost:3000") 
 	  @DeleteMapping("/{id}")
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
