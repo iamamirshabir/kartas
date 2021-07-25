@@ -55,6 +55,7 @@ public class MediController {
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('PATIENT')")
 	  
 	  ResponseEntity<?> newUser(@RequestBody Medication newUser ) {
+		  newUser.setEligible(false);
 		  Medication medi = repository.save(newUser);
 		  return ResponseEntity.ok(medi);
 	  }

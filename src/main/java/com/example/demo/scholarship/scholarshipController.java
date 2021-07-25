@@ -58,6 +58,7 @@ public class scholarshipController {
 	  @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
 	  
 	  ResponseEntity<?> newUser(@RequestBody scholarship newUser ) {
+		  newUser.setEligible(false);
 		  scholarship scholarship = repository.save(newUser);
 		  return ResponseEntity.ok(scholarship);
 	  }
