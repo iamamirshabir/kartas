@@ -17,10 +17,10 @@ class LoadDatabase {
   CommandLineRunner initDatabase(RoleRepository repository) {
 
     return args -> {
-      log.info("Preloading " + repository.save(new Role(ERole.ROLE_ADMIN)));
-      log.info("Preloading " + repository.save(new Role(ERole.ROLE_DONOR)));
-      log.info("Preloading " + repository.save(new Role(ERole.ROLE_PATIENT)));
-      log.info("Preloading " + repository.save(new Role(ERole.ROLE_STUDENT)));
+    //  log.info("Preloading " + repository.save(new Role(ERole.ROLE_ADMIN)));
+    //  log.info("Preloading " + repository.save(new Role(ERole.ROLE_DONOR)));
+    //  log.info("Preloading " + repository.save(new Role(ERole.ROLE_PATIENT)));
+    //  log.info("Preloading " + repository.save(new Role(ERole.ROLE_STUDENT)));
     };
   }
 }
