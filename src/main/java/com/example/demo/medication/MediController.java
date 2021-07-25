@@ -90,7 +90,7 @@ public class MediController {
 	  
 	  ResponseEntity<?> grantMedication(@PathVariable Long id) {
 		  Optional<Medication> optionalSc = repository.findById(id);
-		  if(optionalSc.isEmpty()) {
+		  if(!optionalSc.isPresent()) {
 		  return ResponseEntity.unprocessableEntity().build();
 		  }
 

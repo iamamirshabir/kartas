@@ -92,7 +92,7 @@ public class scholarshipController {
 	  
 	  ResponseEntity<?> grantscholarship(@PathVariable Long id) {
 		  Optional<scholarship> optionalSc = repository.findById(id);
-		  if(optionalSc.isEmpty()) {
+		  if(!optionalSc.isPresent()) {
 			  return ResponseEntity.unprocessableEntity().build();
 			  
 			  }
