@@ -12,8 +12,10 @@ import javax.persistence.Table;
 
 import com.example.demo.patient.Patient;
 import com.example.demo.student.Student;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties (value = { "hibernateLazyInitializer", "handler"})
 @Table(name="scholarship")
 public class scholarship {
 	
@@ -21,7 +23,7 @@ public class scholarship {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "student_id", nullable = false)
 	    private Student student;
 

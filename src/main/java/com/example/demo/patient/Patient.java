@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.example.demo.medication.Medication;
 import com.example.demo.scholarship.scholarship;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -97,7 +98,7 @@ public class Patient {
 	}
 
 
-
+	@JsonIgnore
 	public Medication getMedication() {
 		return medication;
 	}

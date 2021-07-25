@@ -90,18 +90,16 @@ public class scholarshipController {
 	  @PutMapping("/grant/{id}")
 	  @PreAuthorize("hasRole('ADMIN')")
 	  
-	  ResponseEntity<?> grantscholarship(@RequestBody scholarship newscholarship, @PathVariable Long id) {
-		  scholarship updatedUser = repository.findById(id)
-				  .map(scholarship ->{
-					  scholarship.setEligible(true);
-					  return repository.save(scholarship);
-				  })
-				  .orElseGet(() ->{
-					  newscholarship.setId(id);
-					  return repository.save(newscholarship);
-				  });
+	  ResponseEntity<?> grantscholarship(@PathVariable Long id) {
+		  Optional<scholarship> optionalSc = repository.findById(id);
+		  if(!optionalSc.isEmpty()) {
+			  optionalSc.get().setEligible(true);
+			  repository.save(optionalSc.get());
+	  
+			  return ResponseEntity.ok(optionalSc.get());  
+		  }
+		  return ResponseEntity.unprocessableEntity().build();
 		  
-		  return ResponseEntity.ok(updatedUser);
 				  
 					 
 	  }

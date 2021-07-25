@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.scholarship.scholarship;
+
 @RestController
 @RequestMapping(value = "/api/medication")
 public class MediController {
@@ -86,19 +88,15 @@ public class MediController {
 	  @PutMapping("/grant/{id}")
 	  @PreAuthorize("hasRole('ADMIN')")
 	  
-	  ResponseEntity<?> grantMedication(@RequestBody Medication newMedication, @PathVariable Long id) {
-		  Medication updatedUser = repository.findById(id)
-				  .map(medi ->{
-					  medi.setEligible(true);
-					 
-					  return repository.save(medi);
-				  })
-				  .orElseGet(() ->{
-					  newMedication.setId(id);
-					  return repository.save(newMedication);
-				  });
-		  
-		  return ResponseEntity.ok(updatedUser);
+	  ResponseEntity<?> grantMedication(@PathVariable Long id) {
+		  Optional<Medication> optionalSc = repository.findById(id);
+		  if(!optionalSc.isEmpty()) {
+			  optionalSc.get().setEligible(true);
+			  repository.save(optionalSc.get());
+	  
+			  return ResponseEntity.ok(optionalSc.get());  
+		  }
+		  return ResponseEntity.unprocessableEntity().build();
 				  
 					 
 	  }
