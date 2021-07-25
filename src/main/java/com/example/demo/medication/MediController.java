@@ -90,14 +90,15 @@ public class MediController {
 	  
 	  ResponseEntity<?> grantMedication(@PathVariable Long id) {
 		  Optional<Medication> optionalSc = repository.findById(id);
-		  if(!optionalSc.isEmpty()) {
-			  optionalSc.get().setEligible(true);
-			  repository.save(optionalSc.get());
-	  
-			  return ResponseEntity.ok(optionalSc.get());  
-		  }
+		  if(optionalSc.isEmpty()) {
 		  return ResponseEntity.unprocessableEntity().build();
-				  
+		  }
+
+		  optionalSc.get().setEligible(true);
+		  repository.save(optionalSc.get());
+  
+		  return ResponseEntity.ok(optionalSc.get());  
+	  	  
 					 
 	  }
 	  

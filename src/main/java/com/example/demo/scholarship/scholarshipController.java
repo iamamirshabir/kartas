@@ -92,14 +92,15 @@ public class scholarshipController {
 	  
 	  ResponseEntity<?> grantscholarship(@PathVariable Long id) {
 		  Optional<scholarship> optionalSc = repository.findById(id);
-		  if(!optionalSc.isEmpty()) {
-			  optionalSc.get().setEligible(true);
-			  repository.save(optionalSc.get());
+		  if(optionalSc.isEmpty()) {
+			  return ResponseEntity.unprocessableEntity().build();
+			  
+			  }
+		  optionalSc.get().setEligible(true);
+		  repository.save(optionalSc.get());
+  
+		  return ResponseEntity.ok(optionalSc.get());  
 	  
-			  return ResponseEntity.ok(optionalSc.get());  
-		  }
-		  return ResponseEntity.unprocessableEntity().build();
-		  
 				  
 					 
 	  }
